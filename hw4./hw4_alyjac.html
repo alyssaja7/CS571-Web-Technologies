@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>HomeWork 4</title>
+	<style type="text/css">
+
+		h3{
+			margin-top:15px;
+			margin-bottom:15px;
+		}
+		#URL{
+			text-align:left;
+			width:130px; 
+			height:10px;
+			margin-bottom: 15px;
+		}
+		#submit{
+			width: 100px;
+			height: 10px;
+		}
+		#head{
+			padding:0 20px;
+		}
+
+	</style>
+	<script type="text/javascript">
+
+		function viewJSON(what) {
+			var URL = what.URL.value;
+			//special case: no input
+			if(URL == ''){
+				alert("Please input a valid URL!");
+				return;
+			}
+
+			function loadJSON(url) {
+
+				var xmlHttpRequest=new XMLHttpRequest();
+				try{
+					xmlHttpRequest.open("GET",url,false); // "synchronous” (deprecated because it freezes the page while waiting for a response) *
+					xmlHttpRequest.send();
+				}catch(e){
+					alert("File does not exist!");
+					return;
+				}
+			
+				xmlHttpRequest.onreadystatechange = function(){
+
+					if(xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 404){
+						alert("File does not exist!");
+						return;
+					}
+				}
+
+				if(xmlHttpRequest.status == 200){
+					try{
+						jsonObj= JSON.parse(xmlHttpRequest.responseText);
+						return jsonObj;	
+					}catch(e){
+						alert("No buildings data Found!");	
+					}
+				}
+	
+			}
+
+			try{
+				jsonObj = loadJSON(URL);
+			}catch(e){
+				return;
+			}
+			
+
+			//deal with the situation which we can't safely access to the jsonObj.name problem:
+			if(jsonObj == null)	return;
+
+			try{
+				jsonObj.onload=generateHTML(jsonObj); 
+
+			}catch(e){
+				alert("No buildings Data Found!");
+				return;	
+			}
+			
+			hWin = window.open("", "_blank", "height=800,width=950");
+			hWin.document.write(html_text);
+			hWin.document.close();
+		}
+
+
+		function generateHTML(jsonObj) {
+
+			var table = jsonObj.Mainline.Table;
+			var header = table.Header.Data; 	//header part
+			var buildings = table.Row; 			//body part
+
+			// special case in buildings part:
+
+			//deal with the no building data situation: 
+			//1. row missing(row doesn't exist); 
+			//2. zero row(row exist, but have no building data)
+			if(buildings == null || buildings.length == 0){
+				throw "No buildings data in the file!";
+				return;
+			}
+
+			//output the header part:
+			html_text="<html><head><title>Largest Manufacturers by Production(2017)</title></head><body>";
+			html_text+="<table border='2' align='center'>";
+			html_text+="<tbody>";
+			html_text += "<tr align='center'>";
+
+			if(header != null){
+				for(let i = 0; i <= header.length - 1; i++){
+					if(header[i]=="Height (ft)"){
+						html_text+="<td><b>Height</b><br/><p align='center' style='padding:0px; margin:0px;'><b>(ft)</b></p></td>";
+						continue;
+					}
+					if(header[i] == null){
+						html_text+="<td></td>";
+					}else{
+						html_text += "<td><b>" + header[i] + "</b></td>";	
+					}	
+				}
+			}
+				
+			html_text += "</tr>";
+
+
+			// output the buildings values:
+			for(let i = 0; i <= buildings.length - 1; i++){
+				
+				html_text+="<tr>";
+
+				html_text+="<td>" + buildings[i].Rank + "</td>";
+				html_text+="<td>" + buildings[i].Name + "</td>";  
+				html_text+="<td><ul>";
+
+				var Hub = buildings[i].Hubs.Hub;
+				var flag = true;    
+					
+				for(let k = 0; k <= Hub.length - 1; k++){
+					//special case: one of the hub element missing	
+					if(Hub[k]==""){
+						html_text+="<li></li>";
+						if(flag){
+							flag = false;
+						}
+						continue;
+					}
+					if(flag){
+						html_text+="<li><b>"+ Hub[k]+"</b></li>";
+						flag = false;
+							
+					}else{
+						html_text+="<li>"+ Hub[k]+"</li>";
+					}	
+				}	
+					
+				html_text+="</ul></td>";
+
+				//Height
+				if(buildings[i].Height == ""){
+					html_text+="<td></td>";
+				}else{
+					html_text+="<td>" + buildings[i].Height + "</td>";
+				}
+					
+				//HomePage
+				if(buildings[i].HomePage != null && buildings[i].HomePage != ""){
+					html_text+="<td><a href="+ buildings[i].HomePage +">"+ buildings[i].HomePage + "</a></td>";
+				}else{
+					html_text+="<td></td>";
+				}
+					
+				
+				//Image Part: Image URL will always either be a URL string or an empty string
+				if(buildings[i].Logo != null && buildings[i].Logo != ""){
+					html_text+="<td><div style='width:180px; height:180px;'><img src=" + buildings[i].Logo + " height='100%' width='100%' " + "/></div></td>";
+				}else{
+					html_text+="<td><div style='width:180px; height:180px;'></div></td>";
+				}	
+
+			}
+
+			html_text+="</tr>";
+			html_text+="</tbody>";
+			html_text+="</table>";
+			html_text+= "</bo" + "<dy> </html>"; 
+		}
+	
+	</script>
+</head>
+<body>
+	
+	<div align="center" style="margin-top:100px">
+		<h3>Enter URL for list of tallest buildings JSON File</h3>
+
+		<form method="POST" name="myform" id="location">
+			<input id="URL" type="text"  name="URL" value="buildinglist.json" maxlength="255" size="100" />			
+			<br/> 
+			<input id="submit" type="button" name="submit" value="Submit Query" onClick="viewJSON(this.form)" />
+		</form>
+
+	</div>	
+
+</body>
+</html>
