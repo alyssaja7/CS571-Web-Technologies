@@ -1,0 +1,182 @@
+	#wholeView{
+		width: 100%；
+		height: 1140px; 
+		margin:0 auto; 
+		padding:0;
+		margin-left: 5px;
+		margin-right: 5px;
+	}
+	
+	#headPart{
+		width: 760px;
+		height: auto; 
+		margin: 0 auto;		
+	}
+
+	#head{
+		width: 666px;
+		height:130px;
+		margin:0 auto;
+		margin-top: 36px;
+		border: 1px solid #303030;	
+	}
+		
+	#title h1{
+		position:relative;
+		margin-top:20px;
+		margin-bottom:0px;
+		text-align: center;
+		font-family:Georgia;
+		color:#333131;
+		font-size: 55px;
+		font-weight: 110;	
+	}
+
+	#nav{
+		width:450px;
+		height:auto;
+		margin:0 auto;
+	}
+	
+	#nav ul{
+		position:absolute;
+		width:450px;
+		height:auto;
+		margin:0 auto;
+		margin-top:9px;
+		margin-bottom: 20px;
+		padding-left: 20px;
+	}
+		
+	#nav li { 
+		float:left;
+		list-style: none;
+		margin-right:22px;
+		font-size:12px;
+		font-style:italic;
+		font-weight:545;
+		font-family:Georgia;	
+	}
+
+	a{
+		color:#858585;
+		text-decoration: none;
+	}
+
+	.home{
+		color: #000000;
+		text-decoration: none;
+	}
+
+	.nature{
+		color: #000000;
+		text-decoration: none;
+	}
+	
+	#Nature{
+		width: 545px;
+		height: 40.5px;	
+	}
+
+	#Nature p{
+		font-family:Georgia;
+		font-size: 30px;
+		font-weight: 110;
+		color:#303030;	
+	}
+
+	#container{	
+		width: 760px;
+		height: 800px;
+		margin:0 auto;
+		margin-top:52px;
+	}
+
+	#row1, #row2{
+		float:left;
+		width: auto;
+		height: 375px;
+		margin:0 auto;
+		margin-bottom:7px;
+	}
+
+	.pic{
+		width:375px;
+		height:375px;
+		overflow: hidden;
+	}
+	
+	#pic1, #pic3{ 
+    	float: left;
+		margin-right:7px;  
+	}
+		
+	#pic1 img, #pic2 img, #pic3 img, #pic4 img{
+		height: 100%;
+  		min-width: 100%;
+  		left: 50%;
+  		position: relative;
+ 		transform: translateX(-50%);
+	}
+
+	#footer{
+		text-align: center;
+		display: inline;
+		margin:0 auto;
+	}
+
+	#footer p{
+		position: relative;
+		width:760px;
+		height: auto;
+		margin:0 auto;
+		margin-top:32px;
+		margin-bottom: 25px;
+		white-space:nowrap; 
+		font-style:italic;
+		font-family:Georgia;
+		font-size: 10px;
+		font-weight:180;
+		color: #333333;
+	}
+
+	#socialmedia{
+		width: 760px;  
+		height: 20px;
+		margin:0 auto;
+		margin-bottom: 40px;
+		text-align: center;
+	}
+
+	#logo{
+		width: 120px;
+		height: 20px;
+		margin:0 auto;	
+	}
+	
+	#facebook img {
+		float:left;
+		width: 20px;
+		height: 20px;
+		margin-left: 7px;
+		
+	}
+
+	#twitter img{
+		float:left;
+		width: 20px;
+		height: 20px;
+		margin-left: 22px;
+			
+	}
+	
+	#instagram img{
+		float:left;
+		width: 20px;
+		height: 20px;
+		margin-left: 22px;	
+	}
+	
+	
+
+	
