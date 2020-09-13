@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Homework6</title>
+    <link rel="stylesheet" type="text/css" href="static/style.css">
+    <!-- Load d3.js -->
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <!-- Load d3-cloud -->
+    <script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/d3.layout.cloud.js"></script>
+    <script type="text/javascript" src="static/index.js"></script>
+</head>
+
+<body>
+<div id="wholePage">
+
+    <div class="sideNav" id="sideNav">
+        <a class="nav-button" id="newsButton" onclick="getNews()">Google News</a>
+        <a class="nav-button" id="searchButton" onclick="getSearchForm()">Search</a>
+    </div>
+
+    <div id="homepage">
+        <div id="head">
+            <div id="slides_container">
+
+                <div class="singleSlide">
+                    <a class="aTag" target="view_window"><img class="imageTag"></a>
+                    <div class="bottomIntro">
+                        <a class="aTag" target="view_window">
+                            <h3 class="h3_tag"></h3>
+                            <p class="p_tag"></p>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div class="singleSlide">
+                    <a class="aTag" target="view_window"><img class="imageTag"></a>
+                    <div class="bottomIntro">
+                        <a class="aTag" target="view_window">
+                            <h3 class="h3_tag"></h3>
+                            <p class="p_tag"></p>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div class="singleSlide">
+                    <a class="aTag" target="view_window"><img class="imageTag"></a>
+                    <div class="bottomIntro">
+                        <a class="aTag" target="view_window">
+                            <h3 class="h3_tag"></h3>
+                            <p class="p_tag"></p>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div class="singleSlide">
+                    <a class="aTag" target="view_window"><img class="imageTag"></a>
+                    <div class="bottomIntro">
+                        <a class="aTag" target="view_window">
+                            <h3 class="h3_tag"></h3>
+                            <p class="p_tag"></p>
+                        </a>
+
+                    </div>
+                </div>
+                <div class="singleSlide">
+                    <a class="aTag" target="view_window"><img class="imageTag"></a>
+                    <div class="bottomIntro">
+                        <a class="aTag" target="view_window">
+                            <h3 class="h3_tag"></h3>
+                            <p class="p_tag"></p>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+            <div id="word_cloud"></div>
+        </div>
+
+
+        <div id="cnn_card">
+            <h2>CNN</h2>
+            <hr>
+            <div id="showCard">
+                <div class="card"><img><h4></h4>
+                    <p></p></div>
+                <div class="card"><img><h4></h4>
+                    <p></p></div>
+                <div class="card"><img><h4></h4>
+                    <p></p></div>
+                <div class="card" id="lastCard"><img><h4></h4>
+                    <p></p></div>
+            </div>
+
+        </div>
+
+
+        <div id="fox_card">
+            <h2>Fox News</h2>
+            <hr>
+            <div id="showCard">
+                <div class="card"><img><h4></h4>
+                    <p></p></div>
+                <div class="card"><img><h4></h4>
+                    <p></p></div>
+                <div class="card"><img><h4></h4>
+                    <p></p></div>
+                <div class="card" id="lastCard"><img><h4></h4>
+                    <p></p></div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div id="searchPage">
+
+        <form method="GET">
+
+            <div id="searchForm">
+                <div style="float: left; padding-top: 3px;">
+                    <div id="keyWText">Keyword<sup style="color:red">*</sup></div>
+                    <div class="input" id="keyW">
+
+                        <input id="keyword" name="keyword" type="text" required autofocus>
+                    </div>
+                    <div id="firstLine">
+                        <div class="input">
+                            From<sup style="color:red">*</sup><input id="from" name="start_date" type="date" required>
+                        </div>
+
+                        <div class="input">
+                            To<sup style="color:red">*</sup><input id="to" name="end_date" type="date" required>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div id="secondLine">
+
+                    <div id="category">
+                        <div>Category</div>
+                        <select id="category_input" name="category">
+                            <option value="All">All</option>
+                            <option value="Business">Business</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="General">General</option>
+                            <option value="Health">Health</option>
+                            <option value="Science">Science</option>
+                            <option value="Sport">Sports</option>
+                            <option value="Science">Science</option>
+                            <option value="Technology">Technology</option>
+                        </select>
+                    </div>
+
+                    <div id="source">
+                        <div>Source</div>
+                        <select id="source_input" name="source">
+                            <option id="All">All</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div id="operationButton">
+                    <input type="submit" value="Search" class="formButton" id="findButton">
+                    <input type="reset" value="Clear" class="formButton" id="clearButton" onclick = "clear()">
+                </div>
+
+            </div>
+        </form>
+
+        <div id="showResult">
+
+            <div class="initCard">
+                <div class="form_img">
+                    <img>
+                </div>
+                <div class="form_intro">
+                    <h4></h4>
+                    <p></p>
+                </div>
+
+            </div>
+
+
+            <div class="initCard">
+                <div class="form_img"><img class="leftImage"></div>
+                <div class="form_intro">
+                    <h4></h4>
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="initCard">
+                <div class="form_img"><img class="leftImage"></div>
+                <div class="form_intro">
+                    <h4></h4>
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="initCard">
+                <div class="form_img"><img class="leftImage"></div>
+                <div class="form_intro">
+                    <h4></h4>
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="initCard">
+                <div class="form_img"><img class="leftImage"></div>
+                <div class="form_intro">
+                    <h4></h4>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+
+</body>
+</html>
